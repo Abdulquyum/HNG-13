@@ -8,7 +8,7 @@ app = Flask(__name__)
 @app.route('/me', methods=['GET'], strict_slashes=False)
 def my_profile():
     try:
-        facts = requests.get('https://catfact.ninja/fact')
+        facts = requests.get('https://catfact.ninja/fact', timeout=10)
         facts.raise_for_status()
         data = facts.json().get('fact', 'No fact available')
     except Exception as e:
