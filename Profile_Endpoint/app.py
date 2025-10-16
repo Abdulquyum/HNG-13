@@ -1,20 +1,19 @@
 #!/usr/bin/env python3
 from flask import Flask, jsonify
 from datetime import datetime, timezone
-# import requests
+import requests
 
 app = Flask(__name__)
 
 @app.route('/me', methods=['GET'], strict_slashes=False)
 def my_profile():
     try:
-        facts = requests.get('https://catfact.ninja/fact', timeout=10)
+        facts = requests.get('https://catfact.ninja/fact')
         facts.raise_for_status()
-        fact = facts.json().get('fact')
+        data = facts.json().get('fact', 'No fact available')
     except Exception as e:
         print(f"Error fetching cat fact: {e}")
-        fact = "Unable to fetch cat fact at this time"
-
+        return None
     profile = {
         "status": "success",
         "user": {
@@ -23,7 +22,7 @@ def my_profile():
             "stack": ["Python", "Flask", "PHP", "Laravel"]
         },
         "timestamp": str(datetime.now(timezone.utc)),
-        "fact": fact
+        "fact": data
     }
 
     return jsonify(profile)
