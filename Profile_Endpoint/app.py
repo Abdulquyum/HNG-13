@@ -19,7 +19,7 @@ def my_profile():
         "user": {
             "email": "ajumobiabdulquyum@gmail.com",
             "name": "Ajumobi Abdulquyum",
-            "stack": ["Python", "Flask", "PHP", "Laravel"]
+            "stack": "Python/Flask",
         },
         "timestamp": str(datetime.now(timezone.utc)),
         "fact": data
@@ -28,4 +28,4 @@ def my_profile():
     return jsonify(profile)
 
 if __name__ == "__main__":
-    app.run(port=3000, host="0.0.0.0", debug=True)
+    app.run(port=5001, host="0.0.0.0", debug=True)
